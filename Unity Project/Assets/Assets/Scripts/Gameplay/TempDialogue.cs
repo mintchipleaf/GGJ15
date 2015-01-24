@@ -4,9 +4,12 @@ using System.Collections;
 public class TempDialogue : DialogueEvent {
 
 	public string passage = "";
-
+	bool talkedTo = false;
 
 	public override bool TryInteract (vp_FPPlayerEventHandler player) {
+
+		if (talkedTo)
+			return false;
 
 		TweeFunctions.Instance.AddCallback (TalkToSheila);
 		TweeFunctions.Instance.AddCallback (TalkToGert);
@@ -19,12 +22,18 @@ public class TempDialogue : DialogueEvent {
 		if (e != "TalkToSheila")
 			return;
 
+		GetComponent<Mover> ().MoveToDestination ();
+		GetComponentInParent<MeetingState> ().MeetingCount++;
+
 	}
 
 	public void TalkToGert (string e) {
 
 		if (e != "TestGert")
 			return;
+
+		GetComponent<Mover> ().MoveToDestination ();
+		GetComponentInParent<MeetingState> ().MeetingCount++;
 
 	}
 
