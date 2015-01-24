@@ -1,4 +1,8 @@
 ﻿:: Start
+
+
+
+:: Begin [EVENT:CoolEvent]
 This is test dialogue [[Next|second]]
 
 
@@ -20,5 +24,13 @@ This is the second start passage [[cool|next test]]
 
 :: next test
 No! [[Okay|finish]]
+
+
+:: Test talk to Sheila [EVENT:TalkToSheila]
+Hi I'm sheila
+
+
+:: Test talk to Gert [EVENT:TestGert]
+Hi, my name is Gertrude
 
 

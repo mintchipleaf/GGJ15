@@ -13,7 +13,6 @@ public class StateManager : MonoBehaviour {
 	void Start () {
 
 		RoomsSpawned.Add (startRoom);
-		Loop ();
 
 	}
 
