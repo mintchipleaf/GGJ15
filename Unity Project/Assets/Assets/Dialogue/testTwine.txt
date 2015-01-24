@@ -1,0 +1,24 @@
+﻿:: Start
+This is test dialogue [[Next|second]]
+
+
+:: second
+This is the second passage [[next|third]]
+
+
+:: third
+Yes! [[Next|finish]]
+
+
+:: finish
+
+
+
+:: Second start
+This is the second start passage [[cool|next test]]
+
+
+:: next test
+No! [[Okay|finish]]
+
+
