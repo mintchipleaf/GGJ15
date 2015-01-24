@@ -29,6 +29,8 @@ public class DialogueDisplay : MonoBehaviour {
 
 	public void Display (string passage) { 
 
+		Cleanup ();
+
 		if (TweeFunctions.Instance.currentAsset != LevelFile)
 			TweeFunctions.Instance.Register (LevelFile);
 
@@ -50,34 +52,49 @@ public class DialogueDisplay : MonoBehaviour {
 
 	void CreateWord (TweeWord word, int i) {
 
-		string fullWord = "";
+		//string fullWord = "";
 
 		foreach (string w in word.Word) {
+			Debug.Log (w);
 			w.Replace (" ", string.Empty);
-			fullWord += w + " ";
+			//fullWord += w + " ";
+		
+
+			if (w == "")
+				return;
+
+			GameObject wordObj = new GameObject (w);
+			Text text = wordObj.AddComponent<Text> ();
+			text.text = w;
+			if (word.LinkTo != null && word.LinkTo != "" && word.Responses == false) {
+				DialogueButton button = wordObj.AddComponent<DialogueButton> ();
+				button.linkTo = word.LinkTo;
+				BoxCollider collide = wordObj.AddComponent<BoxCollider> ();
+				collide.size = new Vector3 (500, 200, 1);
+			}
+			text.font = font;
+			text.fontSize = 50;
+			text.color = Color.black;
+			text.rectTransform.sizeDelta = new Vector2 (500, text.preferredHeight);
+			text.rectTransform.anchoredPosition = new Vector2 (-text.preferredWidth, -text.preferredHeight);
+
+			wordObj.transform.SetParent (CanvasScript.Instance.transform);
+			wordObj.transform.position = DisplayStart;
+
+			WordObjects.Add (wordObj);
 		}
 
-		if (fullWord == "")
+
+	}
+
+	void Cleanup () {
+
+		if (WordObjects.Count == 0)
 			return;
 
-		GameObject wordObj = new GameObject (fullWord);
-		Text text = wordObj.AddComponent<Text> ();
-		text.text = fullWord;
-		if (word.LinkTo != null && word.LinkTo != "" && word.Responses == false) {
-			DialogueButton button = wordObj.AddComponent<DialogueButton> ();
-			button.linkTo = word.LinkTo;
+		foreach (GameObject obj in WordObjects) {
+			Destroy (obj.gameObject);
 		}
-		text.font = font;
-		text.fontSize = 50;
-		text.color = Color.black;
-		text.rectTransform.sizeDelta = new Vector2 (500, text.preferredHeight);
-		text.rectTransform.anchoredPosition = new Vector2 (-text.preferredWidth, -text.preferredHeight);
-
-		wordObj.transform.SetParent (CanvasScript.Instance.transform);
-		wordObj.transform.position = DisplayStart;
-
-		WordObjects.Add (wordObj);
-
 
 	}
 }

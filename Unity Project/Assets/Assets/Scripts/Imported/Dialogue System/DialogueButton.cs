@@ -10,7 +10,7 @@ public class DialogueButton : MonoBehaviour {
 	
 	}
 	
-	void OnClick () {
+	void OnMouseDown () {
 
 		if (linkTo != "") {
 			DialogueDisplay.Instance.Display (linkTo);
