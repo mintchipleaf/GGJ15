@@ -29,7 +29,7 @@ public class DialogueDisplay : MonoBehaviour {
 
 	public void Display (string passage) { 
 
-		Cleanup ();
+		//Cleanup ();
 
 		if (TweeFunctions.Instance.currentAsset != LevelFile)
 			TweeFunctions.Instance.Register (LevelFile);

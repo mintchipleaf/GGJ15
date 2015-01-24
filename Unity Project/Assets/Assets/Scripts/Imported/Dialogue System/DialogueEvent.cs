@@ -3,13 +3,15 @@ using System.Collections;
 
 public class DialogueEvent : vp_Interactable
 {
+	public string passageName;
 
-		public override bool TryInteract (vp_FPPlayerEventHandler player)
-		{
+	public void Start(){
+		DialogueDisplay.Instance.Display (passageName);
+	}
 
-
-				DialogueDisplay.Instance.Display ("Begin");
-				return base.TryInteract (player);
-		}
+	/*public override bool TryInteract (vp_FPPlayerEventHandler player)
+	{
+		return base.TryInteract (player);
+	}*/
 
 }
