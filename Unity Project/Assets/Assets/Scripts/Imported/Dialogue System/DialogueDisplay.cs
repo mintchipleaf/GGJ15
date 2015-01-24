@@ -55,15 +55,13 @@ public class DialogueDisplay : MonoBehaviour {
 		//string fullWord = "";
 
 		foreach (string w in word.Word) {
-			Debug.Log (w);
 			w.Replace (" ", string.Empty);
 			//fullWord += w + " ";
-		
-
 			if (w == "")
 				return;
 
 			GameObject wordObj = new GameObject (w);
+
 			Text text = wordObj.AddComponent<Text> ();
 			text.text = w;
 			if (word.LinkTo != null && word.LinkTo != "" && word.Responses == false) {

@@ -5,60 +5,51 @@ using System.Collections.Generic;
 public class StateManager : MonoBehaviour {
 
 	public GameObject startRoom;
-	public List<GameObject> RoomsSpawned = new List<GameObject>();
+	public List<GameObject> RoomsSpawned = new List<GameObject> ();
 	public GameObject RoomPrefab;
 
-	GameObject currentDoor;
+	DoorScript currentDoor;
 
-	void Start() {
+	void Start () {
 
-		RoomsSpawned.Add(startRoom);
-		Loop();
-
-	}
-
-	public void Loop() {
-
-		CreateNewRoom();
-		currentDoor.GetComponent<DoorScript>().OpenDoor();
+		RoomsSpawned.Add (startRoom);
+		Loop ();
 
 	}
 
-	public void CreateNewRoom() {
+	public void Loop () {
 
-		Vector3 pos = RoomsSpawned [0].transform.position + new Vector3(0, 0, 30.0f);
-		GameObject obj = Instantiate(RoomPrefab, pos, Quaternion.identity) as GameObject;
-		RoomsSpawned.Add(obj);
-		currentDoor = GetDoor(obj);
+		CreateNewRoom ();
+		currentDoor.GetComponent<DoorScript> ().OpenDoor ();
 
 	}
 
-	GameObject GetDoor(GameObject obj) {
+	public void CreateNewRoom () {
 
-		foreach (Transform t in obj.transform) {
-
-			if (t.name == "Door Trigger") {
-
-				return t.gameObject;
-
-			}
-
-		}
-
-		return null;
+		Cleanup ();
+		Vector3 pos = RoomsSpawned [0].transform.position + new Vector3 (0, 0, 30.0f);
+		GameObject obj = Instantiate (RoomPrefab, pos, Quaternion.identity) as GameObject;
+		RoomsSpawned.Add (obj);
+		currentDoor = GetDoor (obj);
 
 	}
 
-	public void Cleanup() {
+	DoorScript GetDoor (GameObject obj) {
 
-		if (RoomsSpawned.Count < 1)
+		return obj.GetComponentInChildren<DoorScript> ();
+
+	}
+
+	public void Cleanup () {
+
+		if (RoomsSpawned.Count < 2)
 			return;
 
 		GameObject obj = RoomsSpawned [0];
 
-		Destroy(obj.gameObject);
+		Destroy (obj.gameObject);
 
-		RoomsSpawned.Remove(obj);
+		RoomsSpawned.Remove (obj);
 
 	}
 
