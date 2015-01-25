@@ -3,6 +3,7 @@ using System.Collections;
 
 public class TempDialogue : DialogueEvent {
 
+
 	public string passage = "";
 	bool talkedTo = false;
 
@@ -14,6 +15,7 @@ public class TempDialogue : DialogueEvent {
 		TweeFunctions.Instance.AddCallback (TalkToSheila);
 		TweeFunctions.Instance.AddCallback (TalkToGert);
 		DialogueDisplay.Instance.Display (passage);
+		talkedTo = true;
 		return base.TryInteract (player);
 	}
 
@@ -24,6 +26,7 @@ public class TempDialogue : DialogueEvent {
 
 		GetComponent<Mover> ().MoveToDestination ();
 		GetComponentInParent<MeetingState> ().MeetingCount++;
+		TweeFunctions.Instance.ClearCallbacks ();
 
 	}
 
@@ -34,6 +37,7 @@ public class TempDialogue : DialogueEvent {
 
 		GetComponent<Mover> ().MoveToDestination ();
 		GetComponentInParent<MeetingState> ().MeetingCount++;
+		TweeFunctions.Instance.ClearCallbacks ();
 
 	}
 

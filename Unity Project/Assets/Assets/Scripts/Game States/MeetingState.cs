@@ -8,7 +8,7 @@ public class MeetingState : GameStates {
 	void Update () {
 
 		if (completed == false && MeetingCount >= 2) {
-			StateManager.Instance.Loop ();
+			StateManager.Instance.currentDoor.DoorUnlocked = true;
 			completed = true;
 		}
 

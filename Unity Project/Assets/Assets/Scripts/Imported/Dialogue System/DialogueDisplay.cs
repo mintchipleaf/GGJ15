@@ -85,7 +85,7 @@ public class DialogueDisplay : MonoBehaviour {
 
 	}
 
-	void Cleanup () {
+	public void Cleanup () {
 
 		if (WordObjects.Count == 0)
 			return;

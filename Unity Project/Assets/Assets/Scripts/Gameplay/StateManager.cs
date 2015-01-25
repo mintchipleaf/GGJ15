@@ -7,15 +7,21 @@ public class StateManager : MonoBehaviour {
 	public static StateManager Instance{ get; private set; }
 
 	public GameObject startRoom;
+	public GameObject startObjs;
+	public GameObject startDoor;
 	public List<GameObject> RoomsSpawned = new List<GameObject> ();
 	public GameObject RoomPrefab;
 
-	DoorScript currentDoor;
+	[HideInInspector]
+	public DoorScript
+		currentDoor;
 
 	public List<GameObject> PossibleStates = new List<GameObject> ();
 	public int currentState = 0;
 
 	public GameObject StateToSpawn { get { return PossibleStates [currentState]; } }
+
+	public bool alwaysUnlocked = false;
 
 	void Awake () {
 
@@ -26,14 +32,15 @@ public class StateManager : MonoBehaviour {
 
 	void Start () {
 
+		startObjs.transform.SetParent (startRoom.transform);
 		RoomsSpawned.Add (startRoom);
+		currentDoor = GetDoor (startRoom);
 
 	}
 
 	public void Loop () {
 
 		CreateNewRoom ();
-		currentDoor.GetComponent<DoorScript> ().OpenDoor ();
 
 	}
 
@@ -46,16 +53,21 @@ public class StateManager : MonoBehaviour {
 		currentDoor = GetDoor (obj);
 		GameObject state = Instantiate (StateToSpawn, pos, Quaternion.identity) as GameObject;
 		state.transform.SetParent (obj.transform);
+		if (alwaysUnlocked)
+			currentDoor.DoorUnlocked = true;
 
 	}
 
-	DoorScript GetDoor (GameObject obj) {
+	public DoorScript GetDoor (GameObject obj) {
 
 		return obj.GetComponentInChildren<DoorScript> ();
 
 	}
 
 	public void Cleanup () {
+
+		if (startDoor != null)
+			Destroy (startDoor.gameObject);
 
 		if (RoomsSpawned.Count < 2)
 			return;

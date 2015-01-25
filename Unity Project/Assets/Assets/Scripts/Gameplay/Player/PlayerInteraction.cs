@@ -28,6 +28,9 @@ public class PlayerInteraction : vp_FPInteractManager {
 		Cursor.SetCursor (mainTex, hotspot, cursorMode);
 
 		if (FindInteractable (out interactable)) {
+			if (interactable == null)
+				return;
+
 			Cursor.SetCursor (grabTex, hotspot, cursorMode);
 			if (Input.GetMouseButtonDown (0))
 				interactable.TryInteract (m_Player);
