@@ -30,7 +30,7 @@ public class DoorCloser : vp_Interactable {
 			return;
 		doorToClose.GetComponent<DoorScript> ().CloseDoor ();
 		TimeManager.Instance.RestartTime ();
-		DialogueDisplay.Instance.Cleanup ();
+		//DialogueDisplay.Instance.Cleanup ();
 		thisActive = false;
 		base.OnTriggerEnter (col);
 	}

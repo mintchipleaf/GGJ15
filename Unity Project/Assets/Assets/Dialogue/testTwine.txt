@@ -26,11 +26,16 @@ This is the second start passage [[cool|next test]]
 No! [[Okay|finish]]
 
 
-:: Test talk to Sheila [EVENT:TalkToSheila]
+:: Sheila start 
 Hi I'm sheila
 
+:: Test talk to Sheila[EVENT:TalkToSheila]
+I want to talk to Gertrude
+
+:: Gertrude start 
+Hi I'm Gertrude
 
 :: Test talk to Gert [EVENT:TestGert]
-Hi, my name is Gertrude
+I want to talk to Sheila
 
 

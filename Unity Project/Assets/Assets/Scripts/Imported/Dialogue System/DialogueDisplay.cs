@@ -24,7 +24,7 @@ public class DialogueDisplay : MonoBehaviour {
 	void Awake () {
 		//wordPrefab = (GameObject)Resources.Load("Text.prefab");
 		Instance = this; 
-		lastWord = new Renderer();
+		lastWord = new Renderer ();
 	} 
 
 	void Start () {
@@ -50,19 +50,22 @@ public class DialogueDisplay : MonoBehaviour {
 		//List<TweeWord> wordList = TweeFunctions.Instance.CurrentTweeBody;
 		string body = TweeFunctions.Instance.CurrentCrunchedBody;
 
-		GameObject wordObj = (GameObject)Instantiate (wordPrefab, Vector3.zero, Quaternion.Euler(0,180,0));
+		GameObject wordObj = (GameObject)Instantiate (wordPrefab, Vector3.zero, Quaternion.Euler (0, 180, 0));
 		
 		Text text = wordObj.GetComponent<Text> ();
 		text.text = body; //fullWord;
 
-		wordObj.transform.SetParent(canvas.transform);
-		wordObj.transform.position = new Vector3(canvas.transform.position.x - 1.5f, canvas.transform.position.y, canvas.transform.position.z);
+		wordObj.transform.SetParent (canvas.transform);
+		wordObj.transform.rotation = canvas.transform.rotation;
+		wordObj.transform.Rotate (new Vector3 (0, 180, 0), Space.Self);
+		wordObj.transform.localPosition = Vector3.zero + new Vector3 (-110f, 0, 0);
+		//wordObj.transform.position = new Vector3 (canvas.transform.position.x - 1.5f, canvas.transform.position.y, canvas.transform.position.z);
 		text.font = font;
 		text.fontSize = 150;
-		text.rectTransform.localScale = new Vector3(0.1f,0.1f,0.1f);
+		text.rectTransform.localScale = new Vector3 (0.1f, 0.1f, 0.1f);
 
 		lastWord = null;
-		wordStart = canvas.GetComponentInChildren<RectTransform>();
+		wordStart = canvas.GetComponentInChildren<RectTransform> ();
 		/*while (i < wordList.Count) {
 			CreateWord (wordList [i], i, canvas);
 			i++;
@@ -90,10 +93,10 @@ public class DialogueDisplay : MonoBehaviour {
 				BoxCollider collide = wordObj.AddComponent<BoxCollider> ();
 				//collide.size = new Vector3 (500, 200, 1);
 			}
-			wordObj.transform.SetParent(canvas.transform);
+			wordObj.transform.SetParent (canvas.transform);
 			text.font = font;
 			text.fontSize = 200;
-			text.rectTransform.localScale = new Vector3(0.1f,0.1f,0.1f);
+			text.rectTransform.localScale = new Vector3 (0.1f, 0.1f, 0.1f);
 			//text.rectTransform.
 			//text.color = Color.black;
 			//text.rectTransform.sizeDelta = new Vector2 (500, text.preferredHeight);
@@ -118,12 +121,14 @@ public class DialogueDisplay : MonoBehaviour {
 		//Debug.Log (fullWord);
 	}
 
-	public void Cleanup () {
+	public void Cleanup (Transform canvas) {
 
-		if (WordObjects.Count == 0)
+		Text[] objs = canvas.GetComponentsInChildren<Text> ();
+
+		if (objs == null)
 			return;
 
-		foreach (GameObject obj in WordObjects) {
+		foreach (Text obj in objs) {
 			Destroy (obj.gameObject);
 		}
 
