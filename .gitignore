@@ -5,3 +5,41 @@ Unity Project/Assembly-CSharp.csproj
 Unity Project/Unity Project-csharp.sln
 Unity Project/Unity Project.sln
 Unity Project/Unity Project.userprefs
+
+*.DS_Store
+# =============== #
+# Unity generated #
+# =============== #
+Temp/
+Obj/
+UnityGenerated/
+Library/
+ 
+ # ===================================== #
+ # Visual Studio / MonoDevelop generated #
+ # ===================================== #
+ ExportedObj/
+ *.svd
+ *.userprefs
+ *.csproj
+ *.pidb
+ *.suo
+ *.sln
+ *.user
+ *.unityproj
+ *.booproj
+
+ *.sublime-project
+ *.sublime-workspace
+  
+  # ============ #
+  # OS generated #
+  # ============ #
+  .DS_Store
+  .DS_Store?
+  ._*
+  .Spotlight-V100
+  .Trashes
+  Icon?
+  ehthumbs.db
+  Thumbs.db
