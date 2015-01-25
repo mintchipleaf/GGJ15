@@ -4,9 +4,21 @@ using System.Collections;
 public class DoorCloser : vp_Interactable {
 
 	public DoorScript doorToClose;
+	bool thisActive = true;
+
+	void Start () {
+
+		if (StateManager.Instance.RoomsSpawned.Count < 2)
+			thisActive = false;
+
+	}
 
 	protected override void OnTriggerEnter (Collider col) {
 
+		if (!thisActive)
+			return;
+
+		thisActive = false;
 		if (StateManager.Instance.RoomsSpawned.Count < 2)
 			return;
 		
@@ -18,6 +30,8 @@ public class DoorCloser : vp_Interactable {
 			return;
 		doorToClose.GetComponent<DoorScript> ().CloseDoor ();
 		TimeManager.Instance.RestartTime ();
+		DialogueDisplay.Instance.Cleanup ();
+		thisActive = false;
 		base.OnTriggerEnter (col);
 	}
 	/*
