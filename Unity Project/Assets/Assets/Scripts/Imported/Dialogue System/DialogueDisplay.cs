@@ -13,21 +13,22 @@ public class DialogueDisplay : MonoBehaviour {
 
 	public Vector2 DisplayStart = new Vector2 (0, 0);
 
+	public GameObject wordPrefab;
+
 	List<GameObject> WordObjects = new List<GameObject> ();
 
 	void Awake () {
-
+		//wordPrefab = (GameObject)Resources.Load("Text.prefab");
 		Instance = this; 
 
 	} 
 
 	void Start () {
-
 		TweeFunctions.Instance.Register (LevelFile);
 
 	}
 
-	public void Display (string passage) { 
+	public void Display (string passage, Transform canvas = null) { 
 
 		//Cleanup ();
 
@@ -44,13 +45,13 @@ public class DialogueDisplay : MonoBehaviour {
 		int i = 0;
 		List<TweeWord> wordList = TweeFunctions.Instance.CurrentTweeBody;
 		while (i < wordList.Count) {
-			CreateWord (wordList [i], i);
+			CreateWord (wordList [i], i, canvas);
 			i++;
 		}
 
 	}
 
-	void CreateWord (TweeWord word, int i) {
+	void CreateWord (TweeWord word, int i, Transform canvas) {
 
 		//string fullWord = "";
 
@@ -60,24 +61,28 @@ public class DialogueDisplay : MonoBehaviour {
 			if (w == "")
 				return;
 
-			GameObject wordObj = new GameObject (w);
+			GameObject wordObj = (GameObject)Instantiate (wordPrefab, Vector3.zero, Quaternion.identity);
 
-			Text text = wordObj.AddComponent<Text> ();
+			Text text = wordObj.GetComponent<Text> ();
 			text.text = w;
 			if (word.LinkTo != null && word.LinkTo != "" && word.Responses == false) {
 				DialogueButton button = wordObj.AddComponent<DialogueButton> ();
 				button.linkTo = word.LinkTo;
 				BoxCollider collide = wordObj.AddComponent<BoxCollider> ();
-				collide.size = new Vector3 (500, 200, 1);
+				//collide.size = new Vector3 (500, 200, 1);
 			}
+			wordObj.transform.SetParent (canvas);
 			text.font = font;
-			text.fontSize = 50;
-			text.color = Color.black;
-			text.rectTransform.sizeDelta = new Vector2 (500, text.preferredHeight);
-			text.rectTransform.anchoredPosition = new Vector2 (-text.preferredWidth, -text.preferredHeight);
+			text.fontSize = 200;
+			text.rectTransform.localScale = new Vector3(0.1f,0.1f,0.1f);
+			//text.rectTransform.
+			//text.color = Color.black;
+			//text.rectTransform.sizeDelta = new Vector2 (500, text.preferredHeight);
+			//text.rectTransform.anchoredPosition = new Vector2 (-text.preferredWidth, -text.preferredHeight);
 
-			wordObj.transform.SetParent (CanvasScript.Instance.transform);
-			wordObj.transform.position = DisplayStart;
+
+			wordObj.transform.position = canvas.position;
+			//wordObj.transform.position = DisplayStart;
 
 			WordObjects.Add (wordObj);
 		}
