@@ -40,7 +40,9 @@ public class StateManager : MonoBehaviour {
 
 	public void Loop () {
 
+		currentDoor.OpenDoor ();
 		CreateNewRoom ();
+		Debug.Log (currentDoor.transform.name);
 
 	}
 
@@ -53,8 +55,8 @@ public class StateManager : MonoBehaviour {
 		currentDoor = GetDoor (obj);
 		GameObject state = Instantiate (StateToSpawn, pos, Quaternion.identity) as GameObject;
 		state.transform.SetParent (obj.transform);
-		if (alwaysUnlocked)
-			currentDoor.DoorUnlocked = true;
+		//if (alwaysUnlocked)
+		//	currentDoor.DoorUnlocked = true;
 
 	}
 
@@ -66,9 +68,6 @@ public class StateManager : MonoBehaviour {
 
 	public void Cleanup () {
 
-		if (startDoor != null)
-			Destroy (startDoor.gameObject);
-
 		if (RoomsSpawned.Count < 2)
 			return;
 
@@ -77,15 +76,6 @@ public class StateManager : MonoBehaviour {
 		Destroy (obj.gameObject);
 
 		RoomsSpawned.Remove (obj);
-
-	}
-
-	IEnumerator Cycle () {
-
-		while (true) {
-			yield return new WaitForSeconds (10.0f);
-			Loop ();
-		}
 
 	}
 

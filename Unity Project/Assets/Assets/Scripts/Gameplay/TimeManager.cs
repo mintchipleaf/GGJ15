@@ -36,10 +36,20 @@ public class TimeManager : MonoBehaviour {
 		if (TimerActive)
 			GameTime += Time.deltaTime;
 
-		if (GameTime >= GameLength)
-			TimerActive = true;
+		if (GameTime >= GameLength) {
+			if (TimerActive)
+				OnTimerEnd ();
+		}
 
 		thisText.text = "Time: " + GameTime;
+
+	}
+
+	void OnTimerEnd () {
+
+		StateManager.Instance.Loop ();
+		Debug.Log ("Test");
+		TimerActive = false;
 
 	}
 

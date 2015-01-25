@@ -8,7 +8,7 @@ public class DoorScript : vp_Interactable {
 	Renderer[] renderers;
 	BoxCollider[] colliders;
 	public bool closed = true;
-	void Start () {
+	void Awake () {
 
 		renderers = GetComponentsInChildren<Renderer> ();
 		colliders = GetComponentsInChildren<BoxCollider> ();
@@ -16,17 +16,17 @@ public class DoorScript : vp_Interactable {
 	}
 
 	public override bool TryInteract (vp_FPPlayerEventHandler player) {
-		if (DoorUnlocked == false)
-			return false;
+		//if (DoorUnlocked == false)
+		//return false;
 
-		OpenDoor ();
+		//OpenDoor ();
 
 		return base.TryInteract (player);
 	}
 
 	public void OpenDoor () {
 
-		StateManager.Instance.Loop ();
+		//StateManager.Instance.Loop ();
 
 		foreach (Renderer r in renderers) {
 			r.enabled = false;
@@ -34,11 +34,11 @@ public class DoorScript : vp_Interactable {
 		foreach (BoxCollider c in colliders) {
 			c.enabled = false;
 		}
-		DialogueDisplay.Instance.Cleanup ();
-		StateManager.Instance.alwaysUnlocked = true;
+		//DialogueDisplay.Instance.Cleanup ();
+		//StateManager.Instance.alwaysUnlocked = true;
 
 		closed = false;
-		DoorUnlocked = false;
+		//DoorUnlocked = false;
 
 	}
 
