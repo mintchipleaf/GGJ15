@@ -26,7 +26,10 @@ public class Mover : MonoBehaviour {
 	}
 
 	public void ExitRoom () {
-
+		if (transform.name == "Sheila") {
+			GetComponent<DialogueEvent> ().interactPassage = "Sheila sad";
+			return;
+		}
 		if (StateManager.Instance.RoomsSpawned.Count > 1)
 			target = StateManager.Instance.GetDoor (StateManager.Instance.RoomsSpawned [1]).transform;
 		else
