@@ -9,6 +9,8 @@ public class DialogueEvent : vp_Interactable {
 	private float brightness;
 	private Canvas canvas;
 
+	bool talkedTo = false;
+
 	public void Start () {
 		canvas = GetComponentInChildren<Canvas> ();
 		DialogueDisplay.Instance.Display (passageName, canvas);
@@ -27,22 +29,30 @@ public class DialogueEvent : vp_Interactable {
 
 	public override bool TryInteract (vp_FPPlayerEventHandler player) {
 
+		if (talkedTo)
+			return false;
+
 		DialogueDisplay.Instance.Cleanup (canvas.transform);
 
 		TweeFunctions.Instance.AddCallback (TalkToGirt);
 		TweeFunctions.Instance.AddCallback (TalkToSheila);
 
 		DialogueDisplay.Instance.Display (interactPassage, canvas);
+		talkedTo = true;
 		return base.TryInteract (player);
 	}
 
 	public void TalkToGirt (string e) {
 
-		if (e != "TestGirt")
+		if (e != "TestGert")
+			return;
+
+		if (talkedTo)
 			return;
 
 		GetComponent<Mover> ().MoveToDestination ();
 		TweeFunctions.Instance.RemoveCallback (TalkToGirt);
+		GetComponentInParent<MeetingState> ().MeetingCount++;
 
 	}
 
@@ -51,8 +61,12 @@ public class DialogueEvent : vp_Interactable {
 		if (e != "TalkToSheila")
 			return;
 
+		if (talkedTo)
+			return;
+
 		GetComponent<Mover> ().MoveToDestination ();
 		TweeFunctions.Instance.RemoveCallback (TalkToSheila);
+		GetComponentInParent<MeetingState> ().MeetingCount++;
 
 	}
 
