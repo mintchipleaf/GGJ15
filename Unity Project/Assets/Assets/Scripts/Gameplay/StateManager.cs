@@ -4,37 +4,63 @@ using System.Collections.Generic;
 
 public class StateManager : MonoBehaviour {
 
+	public static StateManager Instance{ get; private set; }
+
 	public GameObject startRoom;
+	public GameObject startObjs;
+	public GameObject startDoor;
 	public List<GameObject> RoomsSpawned = new List<GameObject> ();
 	public GameObject RoomPrefab;
 
-	DoorScript currentDoor;
+	[HideInInspector]
+	public DoorScript
+		currentDoor;
+
+	public List<GameObject> PossibleStates = new List<GameObject> ();
+	public int currentState = 0;
+
+	public GameObject StateToSpawn { get { return PossibleStates [currentState]; } }
+
+	public bool alwaysUnlocked = false;
+
+	void Awake () {
+
+		if (Instance == null)
+			Instance = this;
+
+	}
 
 	void Start () {
 
+		startObjs.transform.SetParent (startRoom.transform);
 		RoomsSpawned.Add (startRoom);
-		Loop ();
+		currentDoor = GetDoor (startRoom);
 
 	}
 
 	public void Loop () {
 
+		currentDoor.OpenDoor ();
 		CreateNewRoom ();
-		currentDoor.GetComponent<DoorScript> ().OpenDoor ();
+		Debug.Log (currentDoor.transform.name);
 
 	}
 
 	public void CreateNewRoom () {
 
 		Cleanup ();
-		Vector3 pos = RoomsSpawned [0].transform.position + new Vector3 (0, 0, 30.0f);
+		Vector3 pos = RoomsSpawned [0].transform.position + new Vector3 (0, 0, -30.0f);
 		GameObject obj = Instantiate (RoomPrefab, pos, Quaternion.identity) as GameObject;
 		RoomsSpawned.Add (obj);
 		currentDoor = GetDoor (obj);
+		GameObject state = Instantiate (StateToSpawn, pos, Quaternion.identity) as GameObject;
+		state.transform.SetParent (obj.transform);
+		//if (alwaysUnlocked)
+		//	currentDoor.DoorUnlocked = true;
 
 	}
 
-	DoorScript GetDoor (GameObject obj) {
+	public DoorScript GetDoor (GameObject obj) {
 
 		return obj.GetComponentInChildren<DoorScript> ();
 

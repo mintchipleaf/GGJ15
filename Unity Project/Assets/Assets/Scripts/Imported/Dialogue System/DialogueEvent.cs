@@ -29,5 +29,4 @@ public class DialogueEvent : vp_Interactable
 	{
 		return base.TryInteract (player);
 	}*/
-
 }
