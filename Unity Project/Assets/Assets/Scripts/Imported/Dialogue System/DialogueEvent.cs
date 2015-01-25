@@ -3,13 +3,30 @@ using System.Collections;
 
 public class DialogueEvent : vp_Interactable
 {
+	public string passageName;
 
-		public override bool TryInteract (vp_FPPlayerEventHandler player)
-		{
+	private float distanceToPlayer;
+	private float brightness;
+	private Canvas canvas;
 
+	public void Start(){
+		canvas = GetComponentInChildren<Canvas>();
+		DialogueDisplay.Instance.Display (passageName, canvas);
+	}
 
-				DialogueDisplay.Instance.Display ("Begin");
-				return base.TryInteract (player);
-		}
+	public void Update(){
+		distanceToPlayer = Vector3.Distance(transform.position, Player.instance.transform.position);
+		//Debug.Log(distanceToPlayer)
+		brightness = 1 - distanceToPlayer / 10;
+		if(distanceToPlayer >= 10)
+			brightness = 0;
+		if(distanceToPlayer <= 2)
+			brightness = 1;
+		canvas.GetComponent<CanvasGroup>().alpha = brightness;
+	}
 
+	/*public override bool TryInteract (vp_FPPlayerEventHandler player)
+	{
+		return base.TryInteract (player);
+	}*/
 }
