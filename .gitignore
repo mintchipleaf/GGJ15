@@ -5,3 +5,5 @@ Unity Project/Assembly-CSharp.csproj
 Unity Project/Unity Project-csharp.sln
 Unity Project/Unity Project.sln
 Unity Project/Unity Project.userprefs
+
+*.DS_Store
