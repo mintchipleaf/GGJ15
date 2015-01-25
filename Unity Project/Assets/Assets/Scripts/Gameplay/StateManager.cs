@@ -17,6 +17,8 @@ public class StateManager : MonoBehaviour {
 		currentDoor;
 
 	public List<GameObject> PossibleStates = new List<GameObject> ();
+	public GameObject creditsRoom;
+	public bool gameIsOver;
 	public int currentState = 0;
 
 	public GameObject StateToSpawn { get { return PossibleStates [currentState]; } }
@@ -50,7 +52,13 @@ public class StateManager : MonoBehaviour {
 
 		Cleanup ();
 		Vector3 pos = RoomsSpawned [0].transform.position + new Vector3 (0, 0, -30.0f);
-		GameObject obj = Instantiate (RoomPrefab, pos, Quaternion.identity) as GameObject;
+		GameObject obj = null;
+		if(gameIsOver){
+			obj = Instantiate (creditsRoom , pos + new Vector3(0, -0.37f, 0), Quaternion.Euler(0,180,0)) as GameObject;	
+		}
+		else{
+			obj = Instantiate (RoomPrefab, pos, Quaternion.identity) as GameObject;
+		}
 		RoomsSpawned.Add (obj);
 		currentDoor = GetDoor (obj);
 		GameObject state = Instantiate (StateToSpawn, pos, Quaternion.identity) as GameObject;
