@@ -6,7 +6,7 @@ public class DialogueEvent : vp_Interactable
 	public string passageName;
 
 	public void Start(){
-		DialogueDisplay.Instance.Display (passageName, GetComponentInChildren<Canvas>().transform);
+		DialogueDisplay.Instance.Display (passageName, GetComponentInChildren<Canvas>());
 	}
 
 	/*public override bool TryInteract (vp_FPPlayerEventHandler player)

@@ -41,6 +41,7 @@
 -define:ENABLE_PROFILER
 -define:UNITY_EDITOR
 -define:UNITY_EDITOR_OSX
+'Assets/Assets/Scripts/Billboard.cs'
 'Assets/Assets/Scripts/CanvasScript.cs'
 'Assets/Assets/Scripts/Gameplay/DoorScript.cs'
 'Assets/Assets/Scripts/Gameplay/Player/PlayerInteraction.cs'
