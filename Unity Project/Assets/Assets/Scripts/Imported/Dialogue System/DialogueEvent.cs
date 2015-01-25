@@ -4,6 +4,7 @@ using System.Collections;
 public class DialogueEvent : vp_Interactable
 {
 	public string passageName;
+	public string interactPassage;
 
 	private float distanceToPlayer;
 	private float brightness;
@@ -23,6 +24,36 @@ public class DialogueEvent : vp_Interactable
 		if(distanceToPlayer <= 2)
 			brightness = 1;
 		canvas.GetComponent<CanvasGroup>().alpha = brightness;
+	}
+
+	public override bool TryInteract (vp_FPPlayerEventHandler player)
+	{
+
+		TweeFunctions.Instance.AddCallback (TalkToGirt);
+		TweeFunctions.Instance.AddCallback (TalkToSheila);
+
+		DialogueDisplay.Instance.Display (interactPassage, canvas);
+		return base.TryInteract (player);
+	}
+
+	public void TalkToGirt(string e){
+
+		if(e != "TestGirt")
+			return;
+
+		GetComponent<Mover>().MoveToDestination();
+		TweeFunctions.Instance.RemoveCallback (TalkToGirt);
+
+	}
+
+	public void TalkToSheila(string e){
+
+		if(e != "TalkToSheila")
+			return;
+
+		GetComponent<Mover>().MoveToDestination();
+		TweeFunctions.Instance.RemoveCallback (TalkToSheila);
+
 	}
 
 	/*public override bool TryInteract (vp_FPPlayerEventHandler player)
