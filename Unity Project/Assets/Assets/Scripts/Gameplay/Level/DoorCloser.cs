@@ -14,7 +14,8 @@ public class DoorCloser : vp_Interactable {
 	}
 
 	protected override void OnTriggerEnter (Collider col) {
-
+		if (col.transform.name != "Player")
+			return;
 		if (!thisActive)
 			return;
 
@@ -32,7 +33,9 @@ public class DoorCloser : vp_Interactable {
 		TimeManager.Instance.RestartTime ();
 		//DialogueDisplay.Instance.Cleanup ();
 		thisActive = false;
+		Destroy(this.gameObject);
 		base.OnTriggerEnter (col);
+
 	}
 	/*
 	public override bool TryInteract (vp_FPPlayerEventHandler player) {

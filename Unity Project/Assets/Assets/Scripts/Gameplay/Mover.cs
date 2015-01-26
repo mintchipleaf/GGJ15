@@ -30,6 +30,9 @@ public class Mover : MonoBehaviour {
 			GetComponent<DialogueEvent> ().interactPassage = "Sheila sad";
 			return;
 		}
+		if (transform.name == "Girtrude" && GetComponentInParent<MeetingState>().completed == true)
+			return;
+
 		if (StateManager.Instance.RoomsSpawned.Count > 1)
 			target = StateManager.Instance.GetDoor (StateManager.Instance.RoomsSpawned [1]).transform;
 		else
