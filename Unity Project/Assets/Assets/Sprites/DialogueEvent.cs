@@ -47,10 +47,10 @@ public class DialogueEvent : vp_Interactable {
 		if (e != "TestGert")
 			return;
 
-		if (talkedTo)
-			return;
+		//if (talkedTo)
+		//return;
 
-		GetComponent<Mover> ().MoveToDestination ();
+		//GetComponent<Mover> ().MoveToDestination ();
 		TweeFunctions.Instance.RemoveCallback (TalkToGirt);
 		GetComponentInParent<MeetingState> ().MeetingCount++;
 
