@@ -25,6 +25,8 @@ public class StateManager : MonoBehaviour {
 
 	public bool alwaysUnlocked = false;
 
+	public GameObject thisState;
+
 	void Awake () {
 
 		if (Instance == null)
@@ -37,6 +39,7 @@ public class StateManager : MonoBehaviour {
 		startObjs.transform.SetParent (startRoom.transform);
 		RoomsSpawned.Add (startRoom);
 		currentDoor = GetDoor (startRoom);
+		thisState = startObjs;
 
 	}
 
@@ -45,6 +48,13 @@ public class StateManager : MonoBehaviour {
 		currentDoor.OpenDoor ();
 		CreateNewRoom ();
 		Debug.Log (currentDoor.transform.name);
+
+	}
+
+	void Update () {
+
+		if (thisState.GetComponent<MeetingState> ().completed == true)
+			gameIsOver = true;
 
 	}
 
@@ -62,6 +72,7 @@ public class StateManager : MonoBehaviour {
 		currentDoor = GetDoor (obj);
 		GameObject state = Instantiate (StateToSpawn, pos, Quaternion.identity) as GameObject;
 		state.transform.SetParent (obj.transform);
+		thisState = state;
 		//if (alwaysUnlocked)
 		//	currentDoor.DoorUnlocked = true;
 
