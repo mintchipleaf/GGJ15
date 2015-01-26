@@ -53,10 +53,9 @@ public class StateManager : MonoBehaviour {
 		Cleanup ();
 		Vector3 pos = RoomsSpawned [0].transform.position + new Vector3 (0, 0, -30.0f);
 		GameObject obj = null;
-		if(gameIsOver){
-			obj = Instantiate (creditsRoom , pos + new Vector3(0, -0.37f, 0), Quaternion.Euler(0,180,0)) as GameObject;	
-		}
-		else{
+		if (gameIsOver) {
+			obj = Instantiate (creditsRoom, pos + new Vector3 (0, -0.37f, 0), Quaternion.Euler (0, 180, 0)) as GameObject;	
+		} else {
 			obj = Instantiate (RoomPrefab, pos, Quaternion.identity) as GameObject;
 		}
 		RoomsSpawned.Add (obj);

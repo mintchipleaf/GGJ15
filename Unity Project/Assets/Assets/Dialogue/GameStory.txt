@@ -1,44 +1,52 @@
-﻿:: Start
-
-
-
-:: Begin [EVENT:CoolEvent]
-This is test dialogue [[Next|second]]
-
-
-:: second
-This is the second passage [[next|third]]
-
-
-:: third
-Yes! [[Next|finish]]
-
-
-:: finish
-
-
-
-:: Second start
-This is the second start passage [[cool|next test]]
-
-
-:: next test
-No! [[Okay|finish]]
+﻿:: Gertrude Start
+Hi, I'm Gertrude
 
 
 :: Sheila Start
 Hi, I'm Sheila
 
 
-:: Test talk to Sheila [EVENT:TalkToSheila]
-I want to talk to Gertrude
+:: Start
+
+
+
+:: Rando Start
+Wow, this party is great
 
 
 :: Test talk to Gert [EVENT:TestGert]
 I want to talk to Sheila
 
 
-:: Gertrude Start
-Hi, I'm Gertrude
+:: Test talk to Sheila [EVENT:TalkToSheila]
+I want to talk to Gertrude
+
+
+:: Rando Interact
+
+
+
+:: Sheila sad
+I guess it's time to go...
+
+
+:: Birdie
+I should dress like this all the time!
+
+
+:: Caveman
+???????
+
+
+:: Guest
+I'm just happy to be invited!
+
+
+:: Disco
+I love your costume. Uh, "Man".
+
+
+:: Mauve
+You're so late!
 
 

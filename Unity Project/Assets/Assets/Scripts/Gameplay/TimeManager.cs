@@ -28,13 +28,24 @@ public class TimeManager : MonoBehaviour {
 
 		GameTime = 0.0f;
 		TimerActive = true;
+		leaving = false;
 
 	}
+
+	bool leaving = false;
 
 	void Update () {
 
 		if (TimerActive)
 			GameTime += Time.deltaTime;
+
+		if (!leaving && GameTime >= GameLength - 10) {
+			GameObject[] objs = GameObject.FindGameObjectsWithTag ("NPCs");
+			Debug.Log (objs.Length);
+			foreach (GameObject o in objs)
+				o.GetComponent<Mover> ().ExitRoom ();
+			leaving = true;
+		}
 
 		if (GameTime >= GameLength) {
 			if (TimerActive)
