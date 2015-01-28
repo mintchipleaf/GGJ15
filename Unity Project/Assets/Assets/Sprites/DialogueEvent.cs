@@ -49,6 +49,8 @@ public class DialogueEvent : vp_Interactable {
 
 		if (talkedTo)
 			return;
+		//if (talkedTo)
+		//return;
 
 		GetComponent<Mover> ().MoveToDestination ();
 		TweeFunctions.Instance.RemoveCallback (TalkToGirt);
