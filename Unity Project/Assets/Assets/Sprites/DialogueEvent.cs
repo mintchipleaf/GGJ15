@@ -11,38 +11,39 @@ public class DialogueEvent : vp_Interactable {
 
 	bool talkedTo = false;
 
-	public void Start () {
-		canvas = GetComponentInChildren<Canvas> ();
-		DialogueDisplay.Instance.Display (passageName, canvas);
+	public void Start() {
+		canvas = GetComponentInChildren<Canvas>();
+		DialogueDisplay.Instance.Display(passageName, canvas);
 	}
 
-	public void Update () {
-		distanceToPlayer = Vector3.Distance (transform.position, Player.instance.transform.position);
+	public void Update() {
+		distanceToPlayer = Vector3.Distance(transform.position, Player.instance.transform.position);
 		//Debug.Log(distanceToPlayer)
 		brightness = 1 - distanceToPlayer / 10;
 		if (distanceToPlayer >= 10)
 			brightness = 0;
 		if (distanceToPlayer <= 2)
 			brightness = 1;
-		canvas.GetComponent<CanvasGroup> ().alpha = brightness;
+		canvas.GetComponent<CanvasGroup>().alpha = brightness;
 	}
 
-	public override bool TryInteract (vp_FPPlayerEventHandler player) {
+	public override bool TryInteract(vp_FPPlayerEventHandler player) {
 
 		if (talkedTo)
 			return false;
 
-		DialogueDisplay.Instance.Cleanup (canvas.transform);
+		DialogueDisplay.Instance.Cleanup(canvas.transform);
 
-		TweeFunctions.Instance.AddCallback (TalkToGirt);
-		TweeFunctions.Instance.AddCallback (TalkToSheila);
+		TweeFunctions.Instance.AddCallback(TalkToGirt);
+		TweeFunctions.Instance.AddCallback(TalkToSheila);
+		TweeFunctions.Instance.AddCallback(GertFixedTV);
 
-		DialogueDisplay.Instance.Display (interactPassage, canvas);
+		DialogueDisplay.Instance.Display(interactPassage, canvas);
 		talkedTo = true;
-		return base.TryInteract (player);
+		return base.TryInteract(player);
 	}
 
-	public void TalkToGirt (string e) {
+	public void TalkToGirt(string e) {
 
 		if (e != "TestGert")
 			return;
@@ -52,13 +53,13 @@ public class DialogueEvent : vp_Interactable {
 		//if (talkedTo)
 		//return;
 
-		GetComponent<Mover> ().MoveToDestination ();
-		TweeFunctions.Instance.RemoveCallback (TalkToGirt);
-		GetComponentInParent<MeetingState> ().MeetingCount++;
+		GetComponent<Mover>().MoveToDestination();
+		TweeFunctions.Instance.RemoveCallback(TalkToGirt);
+		GetComponentInParent<MeetingState>().MeetingCount++;
 
 	}
 
-	public void TalkToSheila (string e) {
+	public void TalkToSheila(string e) {
 
 		if (e != "TalkToSheila")
 			return;
@@ -66,9 +67,22 @@ public class DialogueEvent : vp_Interactable {
 		if (talkedTo)
 			return;
 
-		GetComponent<Mover> ().MoveToDestination ();
-		TweeFunctions.Instance.RemoveCallback (TalkToSheila);
-		GetComponentInParent<MeetingState> ().MeetingCount++;
+		GetComponent<Mover>().MoveToDestination();
+		TweeFunctions.Instance.RemoveCallback(TalkToSheila);
+		GetComponentInParent<MeetingState>().MeetingCount++;
+
+	}
+
+	public void GertFixedTV(string e) {
+
+		if (e != "GertFixTV")
+			return;
+
+		if (talkedTo)
+			return;
+
+		GetComponent<Mover>().MoveToDestination();
+		TweeFunctions.Instance.RemoveCallback(GertFixedTV);
 
 	}
 

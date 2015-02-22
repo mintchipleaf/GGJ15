@@ -1,20 +1,4 @@
-﻿:: Gertrude Start
-Hi, I'm Gertrude
-
-
-:: Sheila Start
-Hi, I'm Sheila
-
-
-:: Start
-
-
-
-:: Rando Start
-Wow, this party is great
-
-
-:: Test talk to Gert [EVENT:TestGert]
+﻿:: Test talk to Gert [EVENT:TestGert]
 I want to talk to Sheila
 
 
@@ -22,8 +6,24 @@ I want to talk to Sheila
 I want to talk to Gertrude
 
 
-:: Rando Interact
+:: Start
 
+
+
+:: Sheila Start
+Hi, I'm Sheila
+
+
+:: Gertrude Start
+Hi, I'm Gertrude
+
+
+:: Sheila State 1
+I want to talk to Gertrude...
+
+
+:: Gertrude State 1 [EVENT:GertFixTV]
+It looks like the TV is busted. I should help.
 
 
 :: Sheila sad
@@ -48,5 +48,13 @@ I love your costume. Uh, "Man".
 
 :: Mauve
 You're so late!
+
+
+:: Rando Start
+Wow, this party is great
+
+
+:: Rando Interact
+
 
 

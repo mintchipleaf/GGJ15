@@ -41,7 +41,6 @@ public class TimeManager : MonoBehaviour {
 
 		if (!leaving && GameTime >= GameLength - 10) {
 			GameObject[] objs = GameObject.FindGameObjectsWithTag ("NPCs");
-			Debug.Log (objs.Length);
 			foreach (GameObject o in objs)
 				o.GetComponent<Mover> ().ExitRoom ();
 			leaving = true;
@@ -59,7 +58,6 @@ public class TimeManager : MonoBehaviour {
 	void OnTimerEnd () {
 
 		StateManager.Instance.Loop ();
-		Debug.Log ("Test");
 		TimerActive = false;
 
 	}
