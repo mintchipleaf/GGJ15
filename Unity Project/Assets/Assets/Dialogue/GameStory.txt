@@ -30,6 +30,14 @@ It looks like the TV is busted. I should help.
 I guess it's time to go...
 
 
+:: Sheila State 2
+Oh! She is getting closer... What do I say?
+
+
+:: Gertrude State 2 [EVENT:GertFinish2]
+Oh there is something interesting over here
+
+
 :: Birdie
 I should dress like this all the time!
 

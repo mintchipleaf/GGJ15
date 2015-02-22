@@ -1,19 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class FirstState : GameStates {
+public class SecondState : GameStates {
 
 	protected override void Start() {
 
 		base.Start();
 
-		TweeFunctions.TweeEvent += GertFixedTV;
+		TweeFunctions.TweeEvent += GertFinishSecond;
 
 	}
 
-	public void GertFixedTV(string e) {
+	void GertFinishSecond(string e) {
 
-		if (e != "GertFixTV")
+		if (e != "GertFinish2")
 			return;
 
 		completed = true;

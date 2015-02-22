@@ -37,6 +37,7 @@ public class DialogueEvent : vp_Interactable {
 		TweeFunctions.Instance.AddCallback(TalkToGirt);
 		TweeFunctions.Instance.AddCallback(TalkToSheila);
 		TweeFunctions.Instance.AddCallback(GertFixedTV);
+		TweeFunctions.Instance.AddCallback(GertFinishSecond);
 
 		DialogueDisplay.Instance.Display(interactPassage, canvas);
 		talkedTo = true;
@@ -83,6 +84,19 @@ public class DialogueEvent : vp_Interactable {
 
 		GetComponent<Mover>().MoveToDestination();
 		TweeFunctions.Instance.RemoveCallback(GertFixedTV);
+
+	}
+
+	void GertFinishSecond(string e) {
+
+		if (e != "GertFinish2")
+			return;
+
+		if (talkedTo)
+			return;
+
+		GetComponent<Mover>().MoveToDestination();
+		TweeFunctions.Instance.RemoveCallback(GertFinishSecond);
 
 	}
 
